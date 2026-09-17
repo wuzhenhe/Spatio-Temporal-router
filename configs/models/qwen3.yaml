@@ -1,0 +1,10 @@
+model:
+  name: Qwen/Qwen3-30B-A3B-Instruct-2507
+  attn_implementation: eager
+  torch_dtype: bfloat16
+  use_cache: false
+  output_router_logits: true
+cache_moe:
+  cache_size: 20
+  temperature: 0.03
+  swap_weight: 0.1

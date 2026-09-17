@@ -1,0 +1,10 @@
+# Install a suitable CUDA build of torch first (see README).
+torch==2.11.0
+transformers==5.17.0
+accelerate==1.15.0
+datasets==4.8.4
+PyYAML==6.0.3
+safetensors==0.8.0
+sentencepiece==0.2.1
+scipy>=1.14,<2
+sympy>=1.14,<2

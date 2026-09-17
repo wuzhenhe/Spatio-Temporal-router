@@ -1,0 +1,28 @@
+quantization:
+  enabled: false
+lora:
+  enabled: false
+training:
+  overwrite_output_dir: false
+  seed: 42
+  num_train_epochs: 4
+  learning_rate: 1.0e-5
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  gradient_checkpointing: true
+  gradient_checkpointing_kwargs: {use_reentrant: false}
+  bf16: true
+  fp16: false
+  tf32: true
+  optim: adamw_torch_fused
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03
+  weight_decay: 0.1
+  max_grad_norm: 1.0
+  logging_steps: 5
+  eval_strategy: "no"
+  do_final_eval: false
+  save_strategy: epoch
+  save_total_limit: 2
+  dataloader_num_workers: 4
+  report_to: none

@@ -1,0 +1,21 @@
+dataset:
+  name: "tau/commonsense_qa"
+  subset: null
+  train_split: "train"
+  eval_split: "validation"
+  split_train_for_eval: false
+  eval_holdout_size: null
+  eval_holdout_ratio: 0.01
+  split_seed: 42
+  split_cache_path: null
+  format: "commonsenseqa"
+  messages_field: "messages"
+  prepend_system_prompt: false
+  source_field: "question_concept"
+  source_include_patterns: []
+  source_exclude_patterns: []
+  max_train_samples: null
+  max_eval_samples: null
+  max_length: 512
+  num_proc: 4
+  system_prompt: "You are a careful commonsense reasoning assistant. Choose the single best answer from the provided options."

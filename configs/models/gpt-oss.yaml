@@ -1,0 +1,17 @@
+model:
+  name: openai/gpt-oss-20b
+  config_name: openai/gpt-oss-20b
+  tokenizer_name: openai/gpt-oss-20b
+  attn_implementation: eager
+  torch_dtype: bfloat16
+  use_cache: false
+  output_router_logits: false
+  dequantize_mxfp4: true
+dataset:
+  label_mask_strategy: offset
+training:
+  learning_rate: 5.0e-6
+cache_moe:
+  cache_size: 8
+  temperature: 0.05
+  swap_weight: 0.01

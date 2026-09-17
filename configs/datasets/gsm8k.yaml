@@ -1,0 +1,21 @@
+dataset:
+  name: "openai/gsm8k"
+  subset: "main"
+  train_split: "train"
+  eval_split: "test"
+  split_train_for_eval: false
+  eval_holdout_size: null
+  eval_holdout_ratio: 0.01
+  split_seed: 42
+  split_cache_path: null
+  format: "gsm8k"
+  messages_field: "messages"
+  prepend_system_prompt: false
+  source_field: "source"
+  source_include_patterns: []
+  source_exclude_patterns: []
+  max_train_samples: null
+  max_eval_samples: null
+  max_length: 512
+  num_proc: 1
+  system_prompt: "You are a careful math tutor. Solve the problem step by step and end with a final answer using the format `#### answer`."

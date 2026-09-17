@@ -1,0 +1,9 @@
+cache_moe:
+  enabled: true
+  balance_weight: 0.0
+  future_gate_type: linear
+  copy_current_router_init: true
+  future_cache_priority_mode: current_plus_future
+  spatio_temporal_enabled: false
+  spatio_only_enabled: false
+  swap_loss_future_gate_only: false
