@@ -2,8 +2,6 @@
 
 Standalone research code for training Temporal Router and Spatio-Temporal Router on sparse Mixture-of-Experts language models, generating benchmark answers, and evaluating expert-cache policies on the resulting routing traces.
 
-[Chinese README](README_zh.md) · [Configuration reference](configs/README.md) · [Anonymous-release checklist](ANONYMITY.md) · [Validation scope](VALIDATION.md)
-
 **Terminology:** Temporal Router is the method previously called Future Router. Historical internal names such as `future_gate`, `future_probs`, and `future_cache_priority_mode` are retained for checkpoint compatibility. Temporal Option MoE is a separate comparison method, not Temporal Router.
 
 **Scope:** generation runs the actual language model. Expert-cache policies are replayed over its recorded routing traces; this repository is not a physical CPU/GPU expert-offloading engine. Cache capacity does not reduce the resident model memory. Reported bandwidth/compute-based latency estimates are proxies, not measured end-to-end acceleration.
@@ -35,13 +33,12 @@ Only a small set of composable profiles is included:
 ```text
 run.py                     # portable training / benchmark inference launcher
 configs/base.yaml          # shared full-fine-tuning settings
-configs/models/            # qwen3, gpt-oss; see configs/README.md
+configs/models/            # qwen3, gpt-oss
 configs/datasets/          # gsm8k, math, commonsenseqa
 configs/methods/            # temporal, spatio-temporal
 accelerate/fsdp.yaml        # single-node FSDP1, sharded checkpoints
 src/                       # model patches, trainer, evaluators, comparisons
 tests/                     # small offline CPU tests
-AGENTS.md                  # concise reproduction guidance for coding agents
 ```
 
 | Setting | Qwen3 | GPT-OSS |
@@ -168,7 +165,7 @@ Keep the complete run directory when transferring checkpoints: `effective_config
 
 For local base-model mirrors, override `model.name`, `model.config_name` and `model.tokenizer_name` together. Local paths in saved configurations must be updated if moved to a different machine. Remote model IDs used by the default recipes do not require such edits.
 
-## 8. Comparisons and validation
+## 8. Comparisons and tests
 
 The source retains LRU/cache-policy comparisons, Window Cache Loss, Temporal Option MoE, ProMoE predictor support and FineMoE store support. Their implementation and optional preparation entrypoints remain in `src/`; they are not the main recipes documented here. Optional LoRA paths require installing PEFT separately and are outside the supplied full-fine-tuning dependency/test scope.
 
@@ -178,10 +175,4 @@ Run the small offline tests without downloading pretrained models:
 python -m unittest discover -s tests -v
 ```
 
-The release has CPU checks for recipe composition, paths, tiny Qwen3/GPT-OSS router execution, gradient flow, generation/cache replay and Qwen3 Trainer checkpoint round trips. Full pretrained-model multi-GPU training and complete benchmark scores were not rerun during packaging. See [VALIDATION.md](VALIDATION.md). Hugging Face repository revisions and all transitive dependencies of historical experiments were not provided; exact historical paper numbers cannot be guaranteed from this packaging alone. Archive the resolved model/dataset snapshots, environment and output artifacts for any reported experiment.
-
-## Anonymous review release
-
-Upload the contents of this directory as the root of a **fresh anonymous repository**. Do not upload its parent development project or reuse its Git history. The review version intentionally contains no paper title, author list, affiliation, personal repository URL, citation or license attribution. Add those only after the anonymous-review period, subject to venue policy and third-party/model/dataset terms.
-
-Do not commit virtual environments, model weights, datasets, credentials, generated outputs or machine-specific configuration. `.gitignore` excludes common local artifacts. Repository ownership, commit author/email, issue activity and Git remote URLs are outside the source archive and can still reveal identity; check them separately using [ANONYMITY.md](ANONYMITY.md) before submission.
+The offline tests cover recipe composition, paths, tiny Qwen3/GPT-OSS router execution, gradient flow, generation/cache replay and Qwen3 Trainer checkpoint round trips. Full pretrained-model multi-GPU training and complete benchmark scores are outside the test suite.
